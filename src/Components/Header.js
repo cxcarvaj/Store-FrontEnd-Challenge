@@ -1,7 +1,20 @@
 import Shop from "../Icons/Shop";
 import ShoppingCart from "../Icons/ShoppingCart";
+import { connect } from "react-redux";
+import { useState, useEffect } from "react";
 
-const Header = () => {
+const Header = ({cart}) => {
+  const [ cartCount, setCartCount ] = useState(0);
+  const [ isActive, setIsActive ] = useState(false);
+
+  useEffect(()=>{
+    let count = 0;
+    cart.forEach(item => {
+        count += item.qty
+    });
+    setCartCount(count);
+  }, [cart, cartCount])
+
   return (
     <div className="relative bg-white">
       <div className="max-w mx-auto px-4">
@@ -15,11 +28,12 @@ const Header = () => {
               C Store
             </a>
           </div>
-          <div className="flex items-center justify-end md:flex-1 lg:w-0">
+          <div className="flex items-center justify-end md:flex-1 lg:w-0 md:mx-8">
             <button
               type="button"
-              className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:mx-8"
+              className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
               aria-expanded="false"
+              onClick={()=>{setIsActive(!isActive)}}
             >
               <span className="sr-only">Shopping-Cart</span>
               <ShoppingCart
@@ -28,10 +42,18 @@ const Header = () => {
                 height="2.5rem"
               />
             </button>
+            <div>{cartCount}</div>
           </div>
         </div>
       </div>
     </div>
   );
 };
-export default Header;
+
+const mapStateToProps = state => {
+  return{
+    cart: state.shop.cart,
+  }
+}
+
+export default connect(mapStateToProps)(Header);

@@ -1,8 +1,7 @@
+import React, {useEffect, useState} from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { useState } from "react";
-import {
-  useQuery,
-} from "react-query";
+import { useQuery } from "react-query";
 import CardItem from "./CardItem";
 
 const getItems = () => {
@@ -14,29 +13,48 @@ const getItems = () => {
   });
 };
 
-const Home = () => {
-  const [response, setResponse] = useState([]);
+const Home = (products) => {
   const { status, data, error, isFetching } = getItems();
   return (
-      <div className="grid gap-4 grid-cols-4">
-          {status === "loading" ? (
-            "Loading..."
-          ) : status === "error" ? (
-            <span>Error: {error.message}</span>
-          ) : (
-            <>
-            {data.map((item)=>{
-                const {id, images, merchant, productId, productType, tags, title, variants} = item;
-                console.log(title,variants)
-                return(
-                    <CardItem key={id} image={images[0]} title={title} variants={variants}/>
-                    )
-            })}
-            <div>{isFetching ? "Background Updating..." : " "}</div>
-            </>
-          )}
-      </div>
+    <div className="grid gap-4 grid-cols-4">
+      {status === "loading" ? (
+        "Loading..."
+      ) : status === "error" ? (
+        <span>Error: {error.message}</span>
+      ) : (
+        <>
+          {data.map((item) => {
+            const {
+              id,
+              images,
+              merchant,
+              productId,
+              productType,
+              tags,
+              title,
+              variants,
+            } = item;
+            return (
+              <React.Fragment key={id}>
+                <CardItem
+                  productId={productId}
+                  image={images[0]}
+                  title={title}
+                  variants={variants}
+                />
+              </React.Fragment>
+            );
+          })}
+          <div>{isFetching ? "Background Updating..." : " "}</div>
+        </>
+      )}
+    </div>
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    products: state.shop.products, //state.shop refers to the reducer
+  };
+};
+export default connect(mapStateToProps)(Home);

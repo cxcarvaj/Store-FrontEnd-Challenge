@@ -1,12 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const CardItem = (props) => {
-  const { key, image, title, variants } = props;
+  const { productId, image, title, variants } = props;
   const { width, height, altText, originalSrc } = image;
   return (
+      <Link href={`product/${productId}`}>
     <div
-      key={key}
-      className="wrapper max-w-xs rounded-b-md shadow-lg overflow-hidden ml-8 my-8"
+      className="wrapper max-w-xs rounded-b-md shadow-lg overflow-hidden ml-8 my-8 cursor-pointer"
     >
       <div>
         <Image
@@ -21,11 +22,14 @@ const CardItem = (props) => {
           {title}
         </div>
         <div className="space-x-4">
-          <span className="font-light line-through">$300</span>
-          <span className="text-opacity-100 text-pink-500">$200</span>
+            {variants[0].compareAtPrice && (
+                <span className="font-light line-through">{`$ ${parseFloat(variants[0].compareAtPrice).toFixed(2)}`}</span>
+            )}
+          <span className="text-opacity-100 text-pink-500">{`$ ${parseFloat(variants[0].price).toFixed(2)}`}</span>
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 
