@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Header from '../src/components/Header'
-export default function Home() {
+import Home from '../src/Components/Home'
+export default function Index() {
   return (
     <div>
       <Head>
@@ -12,9 +13,7 @@ export default function Home() {
 
       <main>
         <Header/>
-        <body>
-        </body>
-
+        <Home/>
       </main>
 
       {/* <footer>
