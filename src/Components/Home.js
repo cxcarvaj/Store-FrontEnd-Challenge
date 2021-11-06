@@ -13,17 +13,17 @@ const getItems = () => {
   });
 };
 
-const Home = (products) => {
+const Home = ({products}) => {
   const { status, data, error, isFetching } = getItems();
   return (
-    <div className="grid gap-4 grid-cols-4">
+    <div className="grid gap-4 md:grid-cols-4 grid-cols-1">
       {status === "loading" ? (
         "Loading..."
       ) : status === "error" ? (
         <span>Error: {error.message}</span>
       ) : (
         <>
-          {data.map((item) => {
+          {products.map((item) => {
             const {
               id,
               images,
