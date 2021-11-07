@@ -1,14 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import { loadCurrentItem } from "../Redux/Shopping/Shopping-actions";
+import { connect } from "react-redux";
+
 
 const CardItem = (props) => {
-  const { productId, image, title, variants } = props;
+  const { productId, image, title, variants, loadCurrentItem, productData } = props;
   const { width, height, altText, originalSrc } = image;
   return (
       <Link href={`product/${productId}`}>
-    <div
+    <button
       className="wrapper max-w-xs rounded-b-md shadow-lg overflow-hidden ml-8 my-8 cursor-pointer"
+      onClick={()=>loadCurrentItem(productData)}
     >
+      {console.log(productData)}
       <div>
         <Image
           src={originalSrc}
@@ -28,9 +33,13 @@ const CardItem = (props) => {
           <span className="text-opacity-100 text-pink-500">{`$ ${parseFloat(variants[0].price).toFixed(2)}`}</span>
         </div>
       </div>
-    </div>
+    </button>
     </Link>
   );
 };
-
-export default CardItem;
+const mapDispatchToProps = (dispatch) => {
+  return{
+    loadCurrentItem: (item) => dispatch(loadCurrentItem(item))
+  }
+}
+export default connect(null, mapDispatchToProps)(CardItem);

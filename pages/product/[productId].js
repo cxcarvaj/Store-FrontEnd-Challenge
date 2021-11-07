@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
 import { addToCart } from '../../src/Redux/Shopping/Shopping-actions';
-const Product = ({productData, addToCart}) => {
+const Product = ({currentProduct, addToCart}) => {
     // const shoppingCart = useSelector(state => state.items);
     return(
         <div>
             hola
-            <button onClick = {()=> addToCart(productData.productId)}>Hasdasdola</button>
+            {/* <button onClick = {()=> addToCart(productData.productId)}>Hasdasdola</button> */}
+            {console.log(currentProduct)}
             {/* <div>{shoppingCart[0].qty}</div> */}
             {/* <button onClick={()=>dispatch(incrementQty(shoppingCart))}>Hola</button> */}
             {/* {console.log(shoppingCart[0])} */}
@@ -18,4 +19,10 @@ const mapDispatchToProps = (dispatch) => {
         addToCart: () => dispatch(addToCart(productId))
     }
 }
-export default connect(null, mapDispatchToProps)(Product);
+
+const mapStateToProps = state => {
+    return {
+        currentProduct: state.shop.currentProduct
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Product);

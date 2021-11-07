@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
 import { useQuery } from "react-query";
 import CardItem from "./CardItem";
+import { loadAllItems } from "../../src/Redux/Shopping/Shopping-actions";
 
 const getItems = () => {
   return useQuery("getAllItems", async () => {
@@ -13,8 +14,11 @@ const getItems = () => {
   });
 };
 
-const Home = ({products}) => {
+const Home = ({ products, loadAllItems}) => {
   const { status, data, error, isFetching } = getItems();
+  useEffect(() => {
+    loadAllItems(data);
+  }, []);
   return (
     <div className="grid gap-4 md:grid-cols-4 grid-cols-1">
       {status === "loading" ? (
@@ -37,6 +41,7 @@ const Home = ({products}) => {
             return (
               <React.Fragment key={id}>
                 <CardItem
+                  productData={item}
                   productId={productId}
                   image={images[0]}
                   title={title}
@@ -57,4 +62,9 @@ const mapStateToProps = (state) => {
     products: state.shop.products, //state.shop refers to the reducer
   };
 };
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadAllItems: (products) => dispatch(loadAllItems(products)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

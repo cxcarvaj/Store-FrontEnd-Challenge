@@ -34,3 +34,10 @@ export const loadCurrentItem = (product) => {
         payload: product
     };
 };
+
+export const loadAllItems = (products) => {
+    return{
+        type: actionTypes.LOAD_ALL_ITEMS,
+        payload: products
+    };
+};
