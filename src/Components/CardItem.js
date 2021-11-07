@@ -13,7 +13,6 @@ const CardItem = (props) => {
       className="wrapper max-w-xs rounded-b-md shadow-lg overflow-hidden ml-8 my-8 cursor-pointer"
       onClick={()=>loadCurrentItem(productData)}
     >
-      {console.log(productData)}
       <div>
         <Image
           src={originalSrc}

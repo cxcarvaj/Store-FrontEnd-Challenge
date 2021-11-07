@@ -15,8 +15,13 @@ const getItems = () => {
 };
 
 const Home = ({ products, loadAllItems}) => {
-    const { status, data, error, isFetching } = getItems();
-    loadAllItems(data);
+  const { status, data, error, isFetching } = getItems();
+  useEffect(() => {
+      console.log(status)
+    if(status==="success"){
+        loadAllItems(data);
+    }
+  },[status]);
   return (
     <div className="grid gap-4 md:grid-cols-4 grid-cols-1">
       {status === "loading" ? (
@@ -25,8 +30,7 @@ const Home = ({ products, loadAllItems}) => {
         <span>Error: {error.message}</span>
       ) : (
         <>
-        {console.log(products)}
-          {products && products.map((item) => {
+          {products.map((item) => {
             const {
               id,
               images,
@@ -56,14 +60,14 @@ const Home = ({ products, loadAllItems}) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadAllItems: (products) => dispatch(loadAllItems(products)),
-  };
-};
 const mapStateToProps = (state) => {
   return {
     products: state.shop.products, //state.shop refers to the reducer
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadAllItems: (products) => dispatch(loadAllItems(products)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
