@@ -17,7 +17,6 @@ const getItems = () => {
 const Home = ({ products, loadAllItems}) => {
   const { status, data, error, isFetching } = getItems();
   useEffect(() => {
-      console.log(status)
     if(status==="success"){
         loadAllItems(data);
     }

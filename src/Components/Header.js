@@ -4,8 +4,10 @@ import ShoppingCart from "../Icons/ShoppingCart";
 import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 import CartItem from "./CartItem";
+import { useRouter } from 'next/router'
 
 const Header = ({ cart }) => {
+  const router = useRouter();
   const [cartCount, setCartCount] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
@@ -22,7 +24,9 @@ const Header = ({ cart }) => {
       <div className="max-w mx-auto px-4">
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
+            <a href="#" onClick={()=>{
+              router.push('/')
+            }}>
               <span className="sr-only">C Store</span>
               <Shop className="h-8 w-auto sm:h-10 fill-current mx-2 text-purple-800	" />
               C Store
