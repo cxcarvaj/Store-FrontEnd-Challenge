@@ -22,7 +22,7 @@ const Home = ({ products, loadAllItems}) => {
     }
   },[status]);
   return (
-    <div className="grid gap-4 md:grid-cols-4 grid-cols-1">
+    <div className="grid gap-4 md:grid-cols-4 grid-cols-2 mx-4">
       {status === "loading" ? (
         "Loading..."
       ) : status === "error" ? (

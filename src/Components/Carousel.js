@@ -4,7 +4,7 @@ const Carousel = ({ test, setSelectedItem }) => {
   const [actualImage, setActualImage] = useState(0);
   const { images } = test;
   return (
-    <div className="relative rounded-lg block md:flex shadow-xl w-1/3 mt-8 ml-8">
+    <div className="relative rounded-lg block md:flex shadow-xl w-1/2 md:h-32 h-24 mt-8 ml-8">
       <button
         onClick={() => {
           let currentImg = actualImage;
@@ -14,7 +14,7 @@ const Carousel = ({ test, setSelectedItem }) => {
             setSelectedItem(currentImg);
           }
         }}
-        className="absolute md:mt-32 mt-6 left-0 bg-white rounded-full shadow-md md:h-12 md:w-12 h-6 w-6 md:text-2xl text-base text-indigo-600 hover:text-indigo-400 focus:text-indigo-400 md:-ml-6 -ml-3 focus:outline-none focus:shadow-outline transform rotate-180"
+        className="absolute md:mt-32 sm:mt-20 mt-10 left-0 top-0 md:top-12 bg-white rounded-full shadow-md md:h-12 md:w-12 h-6 w-6 md:text-2xl text-base text-indigo-600 hover:text-indigo-400 focus:text-indigo-400 md:-ml-6 -ml-3 focus:outline-none focus:shadow-outline transform rotate-180"
       >
         <span className="block">&#x279c;</span>
       </button>
@@ -27,7 +27,7 @@ const Carousel = ({ test, setSelectedItem }) => {
             setSelectedItem(currentImg);
           }
         }}
-        className="absolute md:mt-32 mt-6 right-0 bg-white rounded-full shadow-md md:h-12 md:w-12 h-6 w-6 md:text-2xl text-base text-indigo-600 hover:text-indigo-400 focus:text-indigo-400 md:-mr-6 -mr-3 focus:outline-none focus:shadow-outline"
+        className="absolute md:mt-32 sm:mt-20 mt-10 right-0 top-0 md:top-12 bg-white rounded-full shadow-md md:h-12 md:w-12 h-6 w-6 md:text-2xl text-base text-indigo-600 hover:text-indigo-400 focus:text-indigo-400 md:-mr-6 -mr-3 focus:outline-none focus:shadow-outline"
       >
         <span className="block">&#x279c;</span>
       </button>

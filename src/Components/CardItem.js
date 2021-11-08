@@ -10,7 +10,7 @@ const CardItem = (props) => {
   return (
       <Link href={`product/${productId}`}>
     <button
-      className="wrapper max-w-xs rounded-b-md shadow-lg overflow-hidden ml-8 my-8 cursor-pointer"
+      className="wrapper max-w-xs rounded-b-md shadow-lg overflow-hidden my-8 cursor-pointer"
       onClick={()=>loadCurrentItem(productData)}
     >
       <div>
