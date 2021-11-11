@@ -8,8 +8,9 @@ import { loadAllItems } from "../../src/Redux/Shopping/Shopping-actions";
 const getItems = () => {
   return useQuery("getAllItems", async () => {
     const { data } = await axios.get(
-      "https://6ca3a296-b07f-40ba-927c-c0c8842c4bfa.mock.pstmn.io//api/get-all-products"
+      "https://4ea3-2800-bf0-8147-3c6-7dc9-ebdf-cba4-ab03.ngrok.io/product"
     );
+    console.log(data)
     return data;
   });
 };
@@ -18,7 +19,7 @@ const Home = ({ products, loadAllItems}) => {
   const { status, data, error, isFetching } = getItems();
   useEffect(() => {
     if(status==="success"){
-        loadAllItems(data);
+        loadAllItems(data.data.product);
     }
   },[status]);
   return (
